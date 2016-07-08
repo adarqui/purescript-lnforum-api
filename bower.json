@@ -1,0 +1,24 @@
+{
+  "name": "purescript-ln-api",
+  "homepage": "https://github.com/adarqui/purescript-ln",
+  "description": "Some core auto-generated api routines for ln-ui",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adarqui/purescript-ln-api.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-aff": "^1.0.0",
+    "purescript-affjax": "^1.1.0",
+    "purescript-api-helpers": "^1.0.0",
+    "purescript-date-helpers": "^1.0.0",
+    "purescript-aff-free": "^1.0.0",
+    "purescript-transformers": "^1.0.0"
+  }
+}
