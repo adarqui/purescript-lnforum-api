@@ -5,7 +5,7 @@ import Data.Either            (Either)
 import Prelude                (map, (<$>), (<>))
 import Purescript.Api.Helpers (class QueryParam, ApiError, ApiEff, getAt, handleError, qp)
 
-import LN.T.Internal.Types
+import LN.T
 
 getUserSanitizedPack :: forall qp. QueryParam qp => Array qp -> String -> ApiEff (Either (ApiError ApplicationError) UserSanitizedPackResponse)
 getUserSanitizedPack params user_name = handleError <$> getAt params ["user_sanitized_pack", user_name]
