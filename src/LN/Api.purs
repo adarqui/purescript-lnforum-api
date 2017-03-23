@@ -8,6 +8,12 @@ import Data.Default
 
 import LN.T
 
+data SpecificApiOptions = SpecificApiOptions
+
+instance specificApiOptions :: Default SpecificApiOptions where
+  def = SpecificApiOptions
+
+
 getApis :: forall qp. QueryParam qp => Array qp -> ApiEff SpecificApiOptions (Either (ApiError ApplicationError) ApiResponses)
 getApis params = handleError <$> getAt params ["apis"]
 

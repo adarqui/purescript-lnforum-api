@@ -7,6 +7,8 @@ import Purescript.Api.Helpers (class QueryParam, ApiError, ApiEff, getAt, handle
 
 import LN.T
 
+data SpecificApiOptions
+
 getUserSanitizedPack :: forall qp. QueryParam qp => Array qp -> String -> ApiEff SpecificApiOptions (Either (ApiError ApplicationError) UserSanitizedPackResponse)
 getUserSanitizedPack params user_name = handleError <$> getAt params ["user_sanitized_pack", user_name]
 
