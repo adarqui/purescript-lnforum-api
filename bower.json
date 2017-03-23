@@ -1,5 +1,6 @@
 {
   "name": "purescript-lnotes-api",
+  "version": "1.2.0",
   "homepage": "https://github.com/adarqui/purescript-ln",
   "description": "Some core auto-generated api routines for ln-ui",
   "license": "MIT",
