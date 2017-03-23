@@ -5,8 +5,6 @@ import Data.Either            (Either)
 import Prelude                (Unit, show, map, (<$>), (<>))
 import Purescript.Api.Helpers (class QueryParam, ApiError, ApiEff, getAt, handleError, qp, deleteAt, putAt, postAt)
 
-import LN.T.Internal.Types
-
 getApis :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) ApiResponses)
 getApis params = handleError <$> getAt params ["apis"]
 
