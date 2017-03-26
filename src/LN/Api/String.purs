@@ -2,8 +2,8 @@ module LN.Api.String where
 
 
 import Data.Either            (Either)
-import Prelude                ((<$>))
-import Purescript.Api.Helpers (class QueryParam, ApiError, ApiEff, getAt, handleError)
+import Prelude                (map, (<$>), (<>))
+import Purescript.Api.Helpers (class QueryParam, ApiError, ApiEff, getAt, handleError, qp)
 
 import LN.T
 
