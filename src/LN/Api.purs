@@ -63,28 +63,28 @@ getLeurons' :: ApiEff (Either (ApiError ApplicationError) LeuronResponses)
 getLeurons'  = handleError <$> getAt ([] :: Array Boolean) ["leurons"]
 
 postLeuron_ByResourceId :: forall qp. QueryParam qp => Array qp -> Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-postLeuron_ByResourceId params _ByResourceId leuron_request = handleError <$> postAt (map qp params <> map qp [ByResourceId _ByResourceId]) ["leuron"] leuron_request
+postLeuron_ByResourceId params _ByResourceId leuron_request = handleError <$> postAt (map qp params <> map qp [ByResourceId _ByResourceId]) ["leurons"] leuron_request
 
 postLeuron_ByResourceId' :: Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-postLeuron_ByResourceId' _ByResourceId leuron_request = handleError <$> postAt [ByResourceId _ByResourceId] ["leuron"] leuron_request
+postLeuron_ByResourceId' _ByResourceId leuron_request = handleError <$> postAt [ByResourceId _ByResourceId] ["leurons"] leuron_request
 
 getLeuron :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-getLeuron params leuron_id = handleError <$> getAt params ["leuron", show leuron_id]
+getLeuron params leuron_id = handleError <$> getAt params ["leurons", show leuron_id]
 
 getLeuron' :: Int -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-getLeuron' leuron_id = handleError <$> getAt ([] :: Array Boolean) ["leuron", show leuron_id]
+getLeuron' leuron_id = handleError <$> getAt ([] :: Array Boolean) ["leurons", show leuron_id]
 
 putLeuron :: forall qp. QueryParam qp => Array qp -> Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-putLeuron params leuron_id leuron_request = handleError <$> putAt params ["leuron", show leuron_id] leuron_request
+putLeuron params leuron_id leuron_request = handleError <$> putAt params ["leurons", show leuron_id] leuron_request
 
 putLeuron' :: Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
-putLeuron' leuron_id leuron_request = handleError <$> putAt ([] :: Array Boolean) ["leuron", show leuron_id] leuron_request
+putLeuron' leuron_id leuron_request = handleError <$> putAt ([] :: Array Boolean) ["leurons", show leuron_id] leuron_request
 
 deleteLeuron :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
-deleteLeuron params leuron_id = handleError <$> deleteAt params ["leuron", show leuron_id]
+deleteLeuron params leuron_id = handleError <$> deleteAt params ["leurons", show leuron_id]
 
 deleteLeuron' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
-deleteLeuron' leuron_id = handleError <$> deleteAt ([] :: Array Boolean) ["leuron", show leuron_id]
+deleteLeuron' leuron_id = handleError <$> deleteAt ([] :: Array Boolean) ["leurons", show leuron_id]
 
 getMe :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) UserResponse)
 getMe params = handleError <$> getAt params ["me"]
