@@ -17,7 +17,7 @@
   "dependencies": {
     "purescript-aff": "^2.0.3",
     "purescript-affjax": "^3.0.2",
-    "purescript-api-helpers": "^1.2.0",
+    "purescript-api-helpers": "^1.2.1",
     "purescript-date-helpers": "^1.2.0",
     "purescript-aff-free": "^3.0.0",
     "purescript-transformers": "^2.3.0",

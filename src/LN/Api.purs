@@ -105,28 +105,28 @@ getResources' :: ApiEff (Either (ApiError ApplicationError) ResourceResponses)
 getResources'  = handleError <$> getAt ([] :: Array Boolean) ["resources"]
 
 postResource :: forall qp. QueryParam qp => Array qp -> ResourceRequest -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-postResource params resource_request = handleError <$> postAt params ["resource"] resource_request
+postResource params resource_request = handleError <$> postAt params ["resources"] resource_request
 
 postResource' :: ResourceRequest -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-postResource' resource_request = handleError <$> postAt ([] :: Array Boolean) ["resource"] resource_request
+postResource' resource_request = handleError <$> postAt ([] :: Array Boolean) ["resources"] resource_request
 
 getResource :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-getResource params resource_id = handleError <$> getAt params ["resource", show resource_id]
+getResource params resource_id = handleError <$> getAt params ["resources", show resource_id]
 
 getResource' :: Int -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-getResource' resource_id = handleError <$> getAt ([] :: Array Boolean) ["resource", show resource_id]
+getResource' resource_id = handleError <$> getAt ([] :: Array Boolean) ["resources", show resource_id]
 
 putResource :: forall qp. QueryParam qp => Array qp -> Int -> ResourceRequest -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-putResource params resource_id resource_request = handleError <$> putAt params ["resource", show resource_id] resource_request
+putResource params resource_id resource_request = handleError <$> putAt params ["resources", show resource_id] resource_request
 
 putResource' :: Int -> ResourceRequest -> ApiEff (Either (ApiError ApplicationError) ResourceResponse)
-putResource' resource_id resource_request = handleError <$> putAt ([] :: Array Boolean) ["resource", show resource_id] resource_request
+putResource' resource_id resource_request = handleError <$> putAt ([] :: Array Boolean) ["resources", show resource_id] resource_request
 
 deleteResource :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
-deleteResource params resource_id = handleError <$> deleteAt params ["resource", show resource_id]
+deleteResource params resource_id = handleError <$> deleteAt params ["resources", show resource_id]
 
 deleteResource' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
-deleteResource' resource_id = handleError <$> deleteAt ([] :: Array Boolean) ["resource", show resource_id]
+deleteResource' resource_id = handleError <$> deleteAt ([] :: Array Boolean) ["resources", show resource_id]
 
 getResourceStats_ByResourcesIds :: forall qp. QueryParam qp => Array qp -> (Array Int) -> ApiEff (Either (ApiError ApplicationError) ResourceStatResponses)
 getResourceStats_ByResourcesIds params _ByResourcesIds = handleError <$> getAt (map qp params <> map qp [ByResourcesIds _ByResourcesIds]) ["resource_stats"]
