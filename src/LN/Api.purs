@@ -344,4 +344,16 @@ getLeuronPack params leuron_id = handleError <$> getAt params ["leuron_pack", sh
 getLeuronPack' :: Int -> ApiEff (Either (ApiError ApplicationError) LeuronPackResponse)
 getLeuronPack' leuron_id = handleError <$> getAt ([] :: Array Boolean) ["leuron_pack", show leuron_id]
 
+getBucketPacks :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) BucketPackResponses)
+getBucketPacks params = handleError <$> getAt params ["bucket_packs"]
+
+getBucketPacks' :: ApiEff (Either (ApiError ApplicationError) BucketPackResponses)
+getBucketPacks'  = handleError <$> getAt ([] :: Array Boolean) ["bucket_packs"]
+
+getBucketPack :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) BucketPackResponse)
+getBucketPack params bucket_id = handleError <$> getAt params ["bucket_pack", show bucket_id]
+
+getBucketPack' :: Int -> ApiEff (Either (ApiError ApplicationError) BucketPackResponse)
+getBucketPack' bucket_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_pack", show bucket_id]
+
 -- footer
