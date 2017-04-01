@@ -56,6 +56,12 @@ getLeuronsCount params = handleError <$> getAt params ["leurons_count"]
 getLeuronsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
 getLeuronsCount'  = handleError <$> getAt ([] :: Array Boolean) ["leurons_count"]
 
+getBucketsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketsCount params = handleError <$> getAt params ["buckets_count"]
+
+getBucketsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketsCount'  = handleError <$> getAt ([] :: Array Boolean) ["buckets_count"]
+
 getLeurons :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) LeuronResponses)
 getLeurons params = handleError <$> getAt params ["leurons"]
 
