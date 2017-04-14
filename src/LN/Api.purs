@@ -176,6 +176,30 @@ deleteBucket params bucket_id = handleError <$> deleteAt params ["buckets", show
 deleteBucket' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteBucket' bucket_id = handleError <$> deleteAt ([] :: Array Boolean) ["buckets", show bucket_id]
 
+postBucketResource :: forall qp. QueryParam qp => Array qp -> Int -> IdRequest -> ApiEff (Either (ApiError ApplicationError) IdResponse)
+postBucketResource params bucket_id id_request = handleError <$> postAt params ["bucket_resources", show bucket_id] id_request
+
+postBucketResource' :: Int -> IdRequest -> ApiEff (Either (ApiError ApplicationError) IdResponse)
+postBucketResource' bucket_id id_request = handleError <$> postAt ([] :: Array Boolean) ["bucket_resources", show bucket_id] id_request
+
+deleteBucketResource :: forall qp. QueryParam qp => Array qp -> Int -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketResource params bucket_id resource_id = handleError <$> deleteAt params ["bucket_resources", show bucket_id, show resource_id]
+
+deleteBucketResource' :: Int -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketResource' bucket_id resource_id = handleError <$> deleteAt ([] :: Array Boolean) ["bucket_resources", show bucket_id, show resource_id]
+
+postBucketLeuron :: forall qp. QueryParam qp => Array qp -> Int -> IdRequest -> ApiEff (Either (ApiError ApplicationError) IdResponse)
+postBucketLeuron params bucket_id id_request = handleError <$> postAt params ["bucket_leurons", show bucket_id] id_request
+
+postBucketLeuron' :: Int -> IdRequest -> ApiEff (Either (ApiError ApplicationError) IdResponse)
+postBucketLeuron' bucket_id id_request = handleError <$> postAt ([] :: Array Boolean) ["bucket_leurons", show bucket_id] id_request
+
+deleteBucketLeuron :: forall qp. QueryParam qp => Array qp -> Int -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketLeuron params bucket_id leuron_id = handleError <$> deleteAt params ["bucket_leurons", show bucket_id, show leuron_id]
+
+deleteBucketLeuron' :: Int -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketLeuron' bucket_id leuron_id = handleError <$> deleteAt ([] :: Array Boolean) ["bucket_leurons", show bucket_id, show leuron_id]
+
 getUsers :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) UserResponses)
 getUsers params = handleError <$> getAt params ["users"]
 
