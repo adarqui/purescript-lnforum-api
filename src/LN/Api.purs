@@ -8,6 +8,54 @@ import Data.Default
 
 import LN.T
 
+getResourcesCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getResourcesCount params = handleError <$> getAt params ["resources_count"]
+
+getResourcesCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getResourcesCount'  = handleError <$> getAt ([] :: Array Boolean) ["resources_count"]
+
+getLeuronsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronsCount params = handleError <$> getAt params ["leurons_count"]
+
+getLeuronsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronsCount'  = handleError <$> getAt ([] :: Array Boolean) ["leurons_count"]
+
+getLeuronNodesCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronNodesCount params = handleError <$> getAt params ["leuron_nodes_count"]
+
+getLeuronNodesCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronNodesCount'  = handleError <$> getAt ([] :: Array Boolean) ["leuron_nodes_count"]
+
+getLeuronTrainingCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronTrainingCount params = handleError <$> getAt params ["leuron_training_count"]
+
+getLeuronTrainingCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getLeuronTrainingCount'  = handleError <$> getAt ([] :: Array Boolean) ["leuron_training_count"]
+
+getBucketsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketsCount params = handleError <$> getAt params ["buckets_count"]
+
+getBucketsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketsCount'  = handleError <$> getAt ([] :: Array Boolean) ["buckets_count"]
+
+getBucketRoundsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketRoundsCount params = handleError <$> getAt params ["bucket_rounds_count"]
+
+getBucketRoundsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketRoundsCount'  = handleError <$> getAt ([] :: Array Boolean) ["bucket_rounds_count"]
+
+getBucketNodesCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketNodesCount params = handleError <$> getAt params ["bucket_nodes_count"]
+
+getBucketNodesCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getBucketNodesCount'  = handleError <$> getAt ([] :: Array Boolean) ["bucket_nodes_count"]
+
+getUsersCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
+getUsersCount params = handleError <$> getAt params ["users_count"]
+
+getUsersCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
+getUsersCount'  = handleError <$> getAt ([] :: Array Boolean) ["users_count"]
+
 getApis :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) ApiResponses)
 getApis params = handleError <$> getAt params ["apis"]
 
@@ -38,30 +86,6 @@ deleteApi params api_id = handleError <$> deleteAt params ["api", show api_id]
 deleteApi' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteApi' api_id = handleError <$> deleteAt ([] :: Array Boolean) ["api", show api_id]
 
-getUsersCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
-getUsersCount params = handleError <$> getAt params ["users_count"]
-
-getUsersCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
-getUsersCount'  = handleError <$> getAt ([] :: Array Boolean) ["users_count"]
-
-getResourcesCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
-getResourcesCount params = handleError <$> getAt params ["resources_count"]
-
-getResourcesCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
-getResourcesCount'  = handleError <$> getAt ([] :: Array Boolean) ["resources_count"]
-
-getLeuronsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
-getLeuronsCount params = handleError <$> getAt params ["leurons_count"]
-
-getLeuronsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
-getLeuronsCount'  = handleError <$> getAt ([] :: Array Boolean) ["leurons_count"]
-
-getBucketsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
-getBucketsCount params = handleError <$> getAt params ["buckets_count"]
-
-getBucketsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
-getBucketsCount'  = handleError <$> getAt ([] :: Array Boolean) ["buckets_count"]
-
 getLeurons :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) LeuronResponses)
 getLeurons params = handleError <$> getAt params ["leurons"]
 
@@ -91,6 +115,24 @@ deleteLeuron params leuron_id = handleError <$> deleteAt params ["leurons", show
 
 deleteLeuron' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteLeuron' leuron_id = handleError <$> deleteAt ([] :: Array Boolean) ["leurons", show leuron_id]
+
+getLeuronNodes :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) LeuronNodeResponses)
+getLeuronNodes params = handleError <$> getAt params ["leuron_nodes"]
+
+getLeuronNodes' :: ApiEff (Either (ApiError ApplicationError) LeuronNodeResponses)
+getLeuronNodes'  = handleError <$> getAt ([] :: Array Boolean) ["leuron_nodes"]
+
+getLeuronNode :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) LeuronNodeResponse)
+getLeuronNode params leuron_node_id = handleError <$> getAt params ["leuron_nodes", show leuron_node_id]
+
+getLeuronNode' :: Int -> ApiEff (Either (ApiError ApplicationError) LeuronNodeResponse)
+getLeuronNode' leuron_node_id = handleError <$> getAt ([] :: Array Boolean) ["leuron_nodes", show leuron_node_id]
+
+putLeuronNode :: forall qp. QueryParam qp => Array qp -> Int -> LeuronNodeRequest -> ApiEff (Either (ApiError ApplicationError) LeuronNodeResponse)
+putLeuronNode params leuron_node_id leuron_node_request = handleError <$> putAt params ["leuron_nodes", show leuron_node_id] leuron_node_request
+
+putLeuronNode' :: Int -> LeuronNodeRequest -> ApiEff (Either (ApiError ApplicationError) LeuronNodeResponse)
+putLeuronNode' leuron_node_id leuron_node_request = handleError <$> putAt ([] :: Array Boolean) ["leuron_nodes", show leuron_node_id] leuron_node_request
 
 getMe :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) UserResponse)
 getMe params = handleError <$> getAt params ["me"]
@@ -176,6 +218,54 @@ deleteBucket params bucket_id = handleError <$> deleteAt params ["buckets", show
 deleteBucket' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteBucket' bucket_id = handleError <$> deleteAt ([] :: Array Boolean) ["buckets", show bucket_id]
 
+getBucketRounds :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponses)
+getBucketRounds params = handleError <$> getAt params ["bucket_rounds"]
+
+getBucketRounds' :: ApiEff (Either (ApiError ApplicationError) BucketRoundResponses)
+getBucketRounds'  = handleError <$> getAt ([] :: Array Boolean) ["bucket_rounds"]
+
+postBucketRound :: forall qp. QueryParam qp => Array qp -> BucketRoundRequest -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+postBucketRound params bucket_round_request = handleError <$> postAt params ["bucket_rounds"] bucket_round_request
+
+postBucketRound' :: BucketRoundRequest -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+postBucketRound' bucket_round_request = handleError <$> postAt ([] :: Array Boolean) ["bucket_rounds"] bucket_round_request
+
+getBucketRound :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+getBucketRound params bucket_round_id = handleError <$> getAt params ["bucket_rounds", show bucket_round_id]
+
+getBucketRound' :: Int -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+getBucketRound' bucket_round_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_rounds", show bucket_round_id]
+
+putBucketRound :: forall qp. QueryParam qp => Array qp -> Int -> BucketRoundRequest -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+putBucketRound params bucket_round_id bucket_round_request = handleError <$> putAt params ["bucket_rounds", show bucket_round_id] bucket_round_request
+
+putBucketRound' :: Int -> BucketRoundRequest -> ApiEff (Either (ApiError ApplicationError) BucketRoundResponse)
+putBucketRound' bucket_round_id bucket_round_request = handleError <$> putAt ([] :: Array Boolean) ["bucket_rounds", show bucket_round_id] bucket_round_request
+
+deleteBucketRound :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketRound params bucket_round_id = handleError <$> deleteAt params ["bucket_rounds", show bucket_round_id]
+
+deleteBucketRound' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
+deleteBucketRound' bucket_round_id = handleError <$> deleteAt ([] :: Array Boolean) ["bucket_rounds", show bucket_round_id]
+
+getBucketNodes :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponses)
+getBucketNodes params = handleError <$> getAt params ["bucket_nodes"]
+
+getBucketNodes' :: ApiEff (Either (ApiError ApplicationError) BucketNodeResponses)
+getBucketNodes'  = handleError <$> getAt ([] :: Array Boolean) ["bucket_nodes"]
+
+getBucketNode :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponse)
+getBucketNode params bucket_node_id = handleError <$> getAt params ["bucket_nodes", show bucket_node_id]
+
+getBucketNode' :: Int -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponse)
+getBucketNode' bucket_node_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_nodes", show bucket_node_id]
+
+putBucketNode :: forall qp. QueryParam qp => Array qp -> Int -> BucketNodeRequest -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponse)
+putBucketNode params bucket_node_id bucket_node_request = handleError <$> putAt params ["bucket_nodes", show bucket_node_id] bucket_node_request
+
+putBucketNode' :: Int -> BucketNodeRequest -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponse)
+putBucketNode' bucket_node_id bucket_node_request = handleError <$> putAt ([] :: Array Boolean) ["bucket_nodes", show bucket_node_id] bucket_node_request
+
 postBucketResource :: forall qp. QueryParam qp => Array qp -> Int -> Int -> Unit -> ApiEff (Either (ApiError ApplicationError) Unit)
 postBucketResource params bucket_id resource_id unit = handleError <$> postAt params ["bucket_resources", show bucket_id, show resource_id] unit
 
@@ -200,17 +290,17 @@ deleteBucketLeuron params bucket_id leuron_id = handleError <$> deleteAt params 
 deleteBucketLeuron' :: Int -> Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteBucketLeuron' bucket_id leuron_id = handleError <$> deleteAt ([] :: Array Boolean) ["bucket_leurons", show bucket_id, show leuron_id]
 
-getBucketResourceId :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
-getBucketResourceId params bucket_id = handleError <$> getAt params ["bucket_resource_ids", show bucket_id]
+getBucketResourceIds :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
+getBucketResourceIds params bucket_id = handleError <$> getAt params ["bucket_resource_ids", show bucket_id]
 
-getBucketResourceId' :: Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
-getBucketResourceId' bucket_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_resource_ids", show bucket_id]
+getBucketResourceIds' :: Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
+getBucketResourceIds' bucket_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_resource_ids", show bucket_id]
 
-getBucketLeuronId :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
-getBucketLeuronId params bucket_id = handleError <$> getAt params ["bucket_leuron_ids", show bucket_id]
+getBucketLeuronIds :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
+getBucketLeuronIds params bucket_id = handleError <$> getAt params ["bucket_leuron_ids", show bucket_id]
 
-getBucketLeuronId' :: Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
-getBucketLeuronId' bucket_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_leuron_ids", show bucket_id]
+getBucketLeuronIds' :: Int -> ApiEff (Either (ApiError ApplicationError) SimpleIntsResponse)
+getBucketLeuronIds' bucket_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_leuron_ids", show bucket_id]
 
 getUsers :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) UserResponses)
 getUsers params = handleError <$> getAt params ["users"]
