@@ -56,6 +56,12 @@ getUsersCount params = handleError <$> getAt params ["users_count"]
 getUsersCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
 getUsersCount'  = handleError <$> getAt ([] :: Array Boolean) ["users_count"]
 
+getBucketRoundLeuronsCount :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) CountResponse)
+getBucketRoundLeuronsCount params bucket_round_id = handleError <$> getAt params ["bucket_round_leurons_count", show bucket_round_id]
+
+getBucketRoundLeuronsCount' :: Int -> ApiEff (Either (ApiError ApplicationError) CountResponse)
+getBucketRoundLeuronsCount' bucket_round_id = handleError <$> getAt ([] :: Array Boolean) ["bucket_round_leurons_count", show bucket_round_id]
+
 getApis :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) ApiResponses)
 getApis params = handleError <$> getAt params ["apis"]
 
@@ -97,6 +103,12 @@ postLeuron_ByResourceId params _ByResourceId leuron_request = handleError <$> po
 
 postLeuron_ByResourceId' :: Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
 postLeuron_ByResourceId' _ByResourceId leuron_request = handleError <$> postAt [ByResourceId _ByResourceId] ["leurons"] leuron_request
+
+postLeuron_ByBucketRoundId :: forall qp. QueryParam qp => Array qp -> Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
+postLeuron_ByBucketRoundId params _ByBucketRoundId leuron_request = handleError <$> postAt (map qp params <> map qp [ByBucketRoundId _ByBucketRoundId]) ["leurons"] leuron_request
+
+postLeuron_ByBucketRoundId' :: Int -> LeuronRequest -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
+postLeuron_ByBucketRoundId' _ByBucketRoundId leuron_request = handleError <$> postAt [ByBucketRoundId _ByBucketRoundId] ["leurons"] leuron_request
 
 getLeuron :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) LeuronResponse)
 getLeuron params leuron_id = handleError <$> getAt params ["leurons", show leuron_id]
@@ -247,6 +259,12 @@ deleteBucketRound params bucket_round_id = handleError <$> deleteAt params ["buc
 
 deleteBucketRound' :: Int -> ApiEff (Either (ApiError ApplicationError) Unit)
 deleteBucketRound' bucket_round_id = handleError <$> deleteAt ([] :: Array Boolean) ["bucket_rounds", show bucket_round_id]
+
+postBucketRoundLeuronOp :: forall qp. QueryParam qp => Array qp -> Int -> Int -> String -> Unit -> ApiEff (Either (ApiError ApplicationError) Unit)
+postBucketRoundLeuronOp params bucket_round_id leuron_id op unit = handleError <$> postAt params ["bucket_round_leuron_op", show bucket_round_id, show leuron_id, op] unit
+
+postBucketRoundLeuronOp' :: Int -> Int -> String -> Unit -> ApiEff (Either (ApiError ApplicationError) Unit)
+postBucketRoundLeuronOp' bucket_round_id leuron_id op unit = handleError <$> postAt ([] :: Array Boolean) ["bucket_round_leuron_op", show bucket_round_id, show leuron_id, op] unit
 
 getBucketNodes :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) BucketNodeResponses)
 getBucketNodes params = handleError <$> getAt params ["bucket_nodes"]
@@ -499,6 +517,12 @@ getLeuronPacks_ByResourceId params _ByResourceId = handleError <$> getAt (map qp
 
 getLeuronPacks_ByResourceId' :: Int -> ApiEff (Either (ApiError ApplicationError) LeuronPackResponses)
 getLeuronPacks_ByResourceId' _ByResourceId = handleError <$> getAt [ByResourceId _ByResourceId] ["leuron_packs"]
+
+getLeuronPacks_ByBucketRoundId :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) LeuronPackResponses)
+getLeuronPacks_ByBucketRoundId params _ByBucketRoundId = handleError <$> getAt (map qp params <> map qp [ByBucketRoundId _ByBucketRoundId]) ["leuron_packs"]
+
+getLeuronPacks_ByBucketRoundId' :: Int -> ApiEff (Either (ApiError ApplicationError) LeuronPackResponses)
+getLeuronPacks_ByBucketRoundId' _ByBucketRoundId = handleError <$> getAt [ByBucketRoundId _ByBucketRoundId] ["leuron_packs"]
 
 getLeuronPack :: forall qp. QueryParam qp => Array qp -> Int -> ApiEff (Either (ApiError ApplicationError) LeuronPackResponse)
 getLeuronPack params leuron_id = handleError <$> getAt params ["leuron_pack", show leuron_id]
