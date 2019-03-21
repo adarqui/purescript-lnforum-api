@@ -38,12 +38,6 @@ getLikesCount params = handleError <$> getAt params ["likes_count"]
 getLikesCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
 getLikesCount'  = handleError <$> getAt ([] :: Array Boolean) ["likes_count"]
 
-getStarsCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
-getStarsCount params = handleError <$> getAt params ["stars_count"]
-
-getStarsCount' :: ApiEff (Either (ApiError ApplicationError) CountResponses)
-getStarsCount'  = handleError <$> getAt ([] :: Array Boolean) ["stars_count"]
-
 getUsersCount :: forall qp. QueryParam qp => Array qp -> ApiEff (Either (ApiError ApplicationError) CountResponses)
 getUsersCount params = handleError <$> getAt params ["users_count"]
 
